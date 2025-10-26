@@ -250,7 +250,7 @@ export const Navbar = ({ title, setTitle, setFilteredData }) => {
 
                 <Typography sx={(theme) => ({
                     [theme.breakpoints.down("sm")]: {
-                        color: "purple", fontWeight: "bold", fontSize: 13, fontStyle: "italic", pr: 1.5, pl: 1
+                        color: "purple", fontWeight: "bold", fontSize: 13, fontStyle: "italic", pr: 1, pl: 1
                     }, [theme.breakpoints.up("sm")]: {
                         color: "purple", fontWeight: "bold", fontSize: 30, fontStyle: "italic", pr: 10, pl: 3
                     }
@@ -268,17 +268,6 @@ export const Navbar = ({ title, setTitle, setFilteredData }) => {
                     </Typography>
                 </Typography>
     
-
-                {/* <TextField
-
-                    label="search here"
-                    value={search}
-                    onChange={handleInputChange}
-                //onChange={(e)=>setSearch(e.target.value)}
-                >
-
-
-                </TextField> */}
 
                 <Autocomplete 
                 freeSolo
@@ -314,11 +303,19 @@ export const Navbar = ({ title, setTitle, setFilteredData }) => {
                     {...params}
                     label= "Search here"
                     variant='outlined'
-                    sx={{
-                        width : 280,
+                    sx={(theme) => ({
+                        [theme.breakpoints.down("sm")]: {
+                            width : 130,
                         backgroundColor : "white",
                         borderRadius : 3
-                    }} 
+                        }, [theme.breakpoints.up("sm")]: {
+                            width : 280,
+                        backgroundColor : "white",
+                        borderRadius : 3
+                        }
+
+                    })}
+                    
                     InputProps={{
                         ...params.InputProps,
                         endAdornment : (
