@@ -33,15 +33,18 @@ import ModeCommentIcon from '@mui/icons-material/ModeComment';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 
-export const RouterHome  = () => {
+export const RouterHome  = ({ filteredData, setFilteredData, title, setTitle}) => {
     const [save , setSave] = useState("");
      const [anchorEl , setAnchorEl] = useState(null);
     const {data , error} = useQuery(GET_BLOGPOSTS);
-    const [filteredData , setFilteredData] = useState();
+    // const [filteredData , setFilteredData] = useState();
     const [loading , setLoading] = useState(false);
-    const [title , setTitle]= useState("");
+    // const [title , setTitle]= useState("");
     const allPosts = data?.blogPosts || [];
     console.log(data,loading , error);
+
+    if(loading) return <p>Loading...</p>;
+    if(error) return <p>Error loading posts </p>
 
     const open = Boolean(anchorEl);
     const navigate = useNavigate();
@@ -83,19 +86,7 @@ export const RouterHome  = () => {
             ...prev , [postId] : !prev[postId],
         }));
 
-        // setLikedPosts((prev) => {
-        //     if(liked[postId]) {
-        //         const updated = prev.filter((p) => p.id !== postId);
-        //         localStorage.setItem("likedPosts" , JSON.stringify(updated));
-        //         return updated;
-        //     }
-        //     else {
-        //         const updated = [...prev , post];
-        //         localStorage.setItem("likedPosts" , JSON.stringify(updated));
-        //         return updated;
-        //     }
-        // })
-
+     
     };
 
     const toggleComment = (postId) => {
@@ -114,52 +105,9 @@ export const RouterHome  = () => {
             ...prev , [postId] : !prev[postId],
         }));
     }
-    
-    // const blogPosts = data?.blogPosts || [];
-    //  const query = useQuery();
-    // const search = query.get("search")?.toLowerCase() || "";
 
-    // const filteredPosts = search ? blogPosts.filter((post) => post.title.toLowerCase().includes(search)) : blogPosts;
 
-    // const{ cartItems , addToCart , removeFromCart } = useCart();
 
-    //     const  bookmarked= cartItems.some(item => item.id === foodItem.id);
-
-    //     const handleBookmarkClick =() => {
-    //         if( bookmarked) {
-    //             removeFromCart(foodItem.id);
-    //         } else {
-    //             addToCart(foodItem);
-    //         }
-    //     }
-        
-
-//        { data.map((device) => {
-//   const { cartItems, addToCart, removeFromCart } = useCart();
-//   const bookmarked = cartItems.some(item => item.id === device.id);
-
-//   const handleBookmarkClick = () => {
-//     if (bookmarked) {
-//       removeFromCart(device.id);
-//     } else {
-//       addToCart(device);
-//     }
-// } });}
-//  const search = () => {
-
-//         setLoading(true);
-
-//         setTimeout(()=>{
-//             const results =  data?.blogPosts?.filter((item) => item.title.toLocaleLowerCase().includes(title.toLocaleLowerCase()));
-
-//         setFilteredData(results);
-//         setLoading(false);
-        
-       
-//         }, 1000);
-
-       
-//     };
     
  const results = title ? (filteredData && filteredData.length > 0 ? filteredData : [] ) : (data?.blogPosts || [])  ;
     //const details = data?.blogPosts.results;
