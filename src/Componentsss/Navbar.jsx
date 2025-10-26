@@ -291,9 +291,15 @@ export const Navbar = ({ title, setTitle, setFilteredData }) => {
                 renderOption={(props , option) => {
                     const matchedItem = allSuggestions.find(item => item.displayText === option);
                     return ( 
-                        <li {...props} style={{display : "flex", flexDirection : "column" , padding : "6px 12px"}} >
-                            <Typography>{matchedItem?.displayText} </Typography>
-                            <Typography>{matchedItem?.catalogName} </Typography>
+                        <li {...props} style={{display : "flex", flexDirection : "column" ,
+                        padding : "6px 12px" ,
+                        
+                          }} >
+                            <Typography style={{whiteSpace:"nowrap",
+                        overflow:"hidden",
+                        textOverflow:'ellipsis',
+                        width:200}}>{matchedItem?.displayText} </Typography>
+                            {/* <Typography>{matchedItem?.catalogName} </Typography> */}
                         </li>
                     );
                 }} 
